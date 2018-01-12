@@ -1,7 +1,7 @@
 services:
 
   net_tomas_kadlec_lunch_guy_base.service.application:
-    alias: net_tomas_kadlec_lunch_guy_base.service_application.cached_application
+    alias: net_tomas_kadlec_lunch_guy_base.service_application.application
 
   net_tomas_kadlec_lunch_guy_base.service_application.application:
     class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Application\Application
@@ -66,6 +66,16 @@ services:
 
   net_tomas_kadlec_lunch_guy_base.service_parser.budvarka:
     class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\Budvarka
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
+
+  net_tomas_kadlec_lunch_guy_base.service_parser.ccibule:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\CervenaCibule
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
+
+  net_tomas_kadlec_lunch_guy_base.service_parser.michelska:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\Michelska
     tags:
       - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
 
