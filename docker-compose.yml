@@ -1,4 +1,6 @@
 app:
-  build: .
-  ports: 
-    - 127.0.0.1:8000:80
+  build: docker
+  ports:
+    - "8001:80"
+  volumes:
+    - ".:/usr/src/app"
