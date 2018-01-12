@@ -25,25 +25,25 @@ parameters:
                 parser: michelska
                 web: 'http://www.michelska.cz/'
                 address: null
-            'U Čejpů':
-                uri: 'https://www.ucejpu.cz/restauracesalanda.php'
-                parser: ucejpu
-                web: 'https://www.ucejpu.cz/'
+            'Červená cibule':
+                uri: 'http://www.cervena-cibule.cz/cz/poledni-menu/'
+                parser: ccibule
+                web: 'http://www.cervena-cibule.cz/'
                 address: null
-            'Mattes':
-                uri: 'http://www.mattesrestaurace.cz/'
-                parser: mattes
-                web: 'http://www.mattesrestaurace.cz/'
-                address: null
-            'Gth':
-                uri: 'http://www.gth.cz/bbc-beta/jidelni-listek'
-                parser: gth
-                web: 'http://www.gth.cz/bbc-beta'
-                address: null
-#            'Momento Delta':
-#                uri: 'http://www.momentodelta.cz/'
-#                parser: momento
-#                web: 'http://www.momentodelta.cz/'
+#            'U Čejpů':
+#                uri: 'https://www.ucejpu.cz/restauracesalanda.php'
+#                parser: ucejpu
+#                web: 'https://www.ucejpu.cz/'
+#                address: null
+#            Mattes:
+#                uri: 'http://www.mattesrestaurace.cz/'
+#                parser: mattes
+#                web: 'http://www.mattesrestaurace.cz/'
+#                address: null
+#            Gth:
+#                uri: 'http://www.gth.cz/bbc-beta/jidelni-listek'
+#                parser: gth
+#                web: 'http://www.gth.cz/bbc-beta'
 #                address: null
         output:
             stdout: 'yes'
