@@ -69,6 +69,21 @@ services:
     tags:
       - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
 
+  net_tomas_kadlec_lunch_guy_base.service_parser.ucejpu:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\UCejpu
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
+
+  net_tomas_kadlec_lunch_guy_base.service_parser.mattes:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\Mattes
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
+
+  net_tomas_kadlec_lunch_guy_base.service_parser.gth:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\Gth
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
+
   net_tomas_kadlec_lunch_guy_base.service_parser.ccibule:
     class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\CervenaCibule
     tags:
@@ -76,6 +91,11 @@ services:
 
   net_tomas_kadlec_lunch_guy_base.service_parser.michelska:
     class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\Michelska
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
+
+  net_tomas_kadlec_lunch_guy_base.service_parser.menicka:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\Menicka
     tags:
       - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
 

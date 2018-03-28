@@ -30,6 +30,16 @@ parameters:
                 parser: ccibule
                 web: 'http://www.cervena-cibule.cz/'
                 address: null
+            'Restaurace Nesmysl':
+                uri: 'https://www.menicka.cz/2279-restaurant-ne---smysl.html'
+                parser: menicka
+                web: null
+                address: null
+            'Perfect Canteen - Moneta':
+                uri: 'https://www.menicka.cz/4235--perfect-canteen---moneta.html'
+                parser: menicka
+                web: null
+                address: null
 #            'U Čejpů':
 #                uri: 'https://www.ucejpu.cz/restauracesalanda.php'
 #                parser: ucejpu
