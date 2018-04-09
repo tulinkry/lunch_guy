@@ -1,6 +1,8 @@
 <?php
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser;
 
+use Symfony\Component\DomCrawler\Crawler;
+
 /**
  * Class Menicka
  *
@@ -70,9 +72,10 @@ class Menicka extends AbstractParser
                 }
             });
 
-        return array_filter($data, function($row) {
+        $data = array_filter($data, function($row) {
             return !empty($row);
-        })[0];
+        });
+        return empty($data) ? $data : $data[0];
     }
 
     /**
@@ -82,7 +85,6 @@ class Menicka extends AbstractParser
      * @return array
      */
     protected function process($data) {
-        print_r($data);
         return $data;
     }
 }

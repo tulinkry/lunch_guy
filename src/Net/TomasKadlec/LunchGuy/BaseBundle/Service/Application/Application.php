@@ -36,6 +36,18 @@ class Application implements ApplicationInterface
      * @var ParserInterface
      */
     protected $parser;
+    
+    /**
+     * @var Client
+     */
+    protected $client;
+    
+    public function __construct() {
+        $this->client = new Client([
+            'cookies' => true,
+            'allow_redirects' => true,
+        ]);
+    }
 
     /**
      * @inheritdoc
@@ -114,8 +126,21 @@ class Application implements ApplicationInterface
      */
     public function retrieve($restaurantId) {
         $configuration = $this->configRestaurant($restaurantId);
-        $client = new Client();
-        $response = $client->request('GET', $configuration['uri']);
+        $headers = array();
+        $headers[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0";
+        $response = $this->client->request('GET', $configuration['uri'], [
+            // 'debug' => true,
+            'curl' => [
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2_0,
+                CURLOPT_TIMEOUT => 60,
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_HTTPHEADER => $headers
+            ],
+          //  'headers' => [
+          //    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0',
+          //    'Accept' => '*/*',
+          //  ],
+        ]);
         if (empty($response) || $response->getStatusCode() != 200) {
             // TODO log!
             // TODO exception?
@@ -130,7 +155,7 @@ class Application implements ApplicationInterface
         return false;
     }
 
-    /** inheritdoc */
+    /** @inheritdoc */
     public function invalidate($restaurantId)
     {
         return false;

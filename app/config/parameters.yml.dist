@@ -40,6 +40,11 @@ parameters:
                 parser: menicka
                 web: null
                 address: null
+            'Restaurace Alfa':
+                uri: 'https://www.zomato.com/cs/praha/restaurace-alfa-michle-praha-4/denn%%C3%%AD-menu'
+                parser: zomato
+                web: null
+                address: null
 #            'U Čejpů':
 #                uri: 'https://www.ucejpu.cz/restauracesalanda.php'
 #                parser: ucejpu
