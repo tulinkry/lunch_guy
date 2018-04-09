@@ -2,8 +2,6 @@
 
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service;
 
-use GuzzleHttp\Client;
-
 /**
  * Class Parser
  *

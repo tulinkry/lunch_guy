@@ -5,6 +5,8 @@ namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
+use GuzzleHttp\Client;
+
 /**
  * Class AbstractParser
  *
