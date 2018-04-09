@@ -7,7 +7,6 @@
  */
 
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Application;
-use GuzzleHttp\Client;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ApplicationInterface;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\OutputInterface;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ParserInterface;
@@ -37,18 +36,6 @@ class Application implements ApplicationInterface
      */
     protected $parser;
     
-    /**
-     * @var Client
-     */
-    protected $client;
-    
-    public function __construct() {
-        $this->client = new Client([
-            'cookies' => true,
-            'allow_redirects' => true,
-        ]);
-    }
-
     /**
      * @inheritdoc
      */
@@ -126,21 +113,8 @@ class Application implements ApplicationInterface
      */
     public function retrieve($restaurantId) {
         $configuration = $this->configRestaurant($restaurantId);
-        $headers = array();
-        $headers[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0";
-        $response = $this->client->request('GET', $configuration['uri'], [
-            // 'debug' => true,
-            'curl' => [
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2_0,
-                CURLOPT_TIMEOUT => 60,
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_HTTPHEADER => $headers
-            ],
-          //  'headers' => [
-          //    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0',
-          //    'Accept' => '*/*',
-          //  ],
-        ]);
+
+        $response = $this->parser->getClient($configuration['parser'])->request('GET', $configuration['uri']);
         if (empty($response) || $response->getStatusCode() != 200) {
             // TODO log!
             // TODO exception?

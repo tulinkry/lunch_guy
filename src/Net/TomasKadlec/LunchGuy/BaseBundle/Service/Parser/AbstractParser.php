@@ -1,4 +1,5 @@
 <?php
+
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser;
 
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ParserInterface;
@@ -11,23 +12,22 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser
  */
-abstract class AbstractParser implements ParserInterface
-{
+abstract class AbstractParser implements ParserInterface {
+
     protected static $selector = 'table tr';
 
     /** @inheritdoc */
-    public function parse($format, $data, $charset = 'UTF-8')
-    {
+    public function parse($format, $data, $charset = 'UTF-8') {
         if (!$this->isSupported($format))
             return new \RuntimeException("Format {$format} is not supported.");
         $data = $this
-            ->getCrawler($data, $charset)
-            ->filter(static::$selector)
-            ->each(function (Crawler $node) {
-                return $node->children()->each(function(Crawler $child) {
-                    return $child->text();
-                });
-            });
+                ->getCrawler($data, $charset)
+                ->filter(static::$selector)
+                ->each(function (Crawler $node) {
+            return $node->children()->each(function(Crawler $child) {
+                        return $child->text();
+                    });
+        });
         return $this->process($data);
     }
 
@@ -38,8 +38,7 @@ abstract class AbstractParser implements ParserInterface
      * @param string $charset used charset, defaults to UTF-8
      * @return Crawler
      */
-    protected function getCrawler($data, $charset = 'UTF-8')
-    {
+    protected function getCrawler($data, $charset = 'UTF-8') {
         $crawler = new Crawler();
         $crawler->addHtmlContent($data, $charset);
         return $crawler;
@@ -53,4 +52,23 @@ abstract class AbstractParser implements ParserInterface
      */
     protected abstract function process($data);
 
+    /**
+     * Return parser specific client for issuing HTTP requests.
+     * 
+     * @return mixed the HTTP client
+     */
+    public function getClient($format) {
+        if (!$this->isSupported($format))
+            return new \RuntimeException("Format {$format} is not supported.");
+        $headers = array();
+        $headers[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0";
+
+        $client = new Client([
+            // 'debug' => true,
+            'curl' => [
+                CURLOPT_HTTPHEADER => $headers
+            ],
+        ]);
+        return $client;
+    }
 }

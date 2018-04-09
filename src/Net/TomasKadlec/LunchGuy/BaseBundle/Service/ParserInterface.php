@@ -42,4 +42,10 @@ interface ParserInterface
      */
     public function parse($format, $data, $charset = 'UTF-8');
 
+    /**
+     * Return parser specific client for issuing HTTP requests.
+     * 
+     * @return mixed the HTTP client
+     */
+    public function getClient($format);
 }

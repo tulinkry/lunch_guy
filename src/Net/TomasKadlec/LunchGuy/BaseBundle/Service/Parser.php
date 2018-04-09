@@ -1,5 +1,8 @@
 <?php
+
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service;
+
+use GuzzleHttp\Client;
 
 /**
  * Class Parser
@@ -9,15 +12,14 @@ namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service;
  *
  * @package Net\TomasKadlec\LunchGuy\BaseBundle\Service
  */
-class Parser implements ParserInterface
-{
+class Parser implements ParserInterface {
+
     /**
      * @var ParserInterface[]
      */
     protected $parsers;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->parsers = [];
     }
 
@@ -32,8 +34,7 @@ class Parser implements ParserInterface
         }
     }
 
-    public function isSupported($format)
-    {
+    public function isSupported($format) {
         foreach ($this->parsers as $parser) {
             if ($parser->isSupported($format))
                 return true;
@@ -41,8 +42,7 @@ class Parser implements ParserInterface
         return false;
     }
 
-    public function supports()
-    {
+    public function supports() {
         $supports = [];
         foreach ($this->parsers as $parser) {
             $supports = array_merge($supports, $parser->supports());
@@ -50,11 +50,21 @@ class Parser implements ParserInterface
         return $supports;
     }
 
-    public function parse($format, $data, $charset = 'UTF-8')
-    {
+    public function parse($format, $data, $charset = 'UTF-8') {
         if (!$this->isSupported($format))
             return new \RuntimeException("Format $format is not supported.");
         return $this->parsers[$format]->parse($format, $data, $charset);
+    }
+
+    /**
+     * Return parser specific client for issuing HTTP requests.
+     * 
+     * @return mixed the HTTP client
+     */
+    public function getClient($format) {
+        if (!$this->isSupported($format))
+            return new \RuntimeException("Format $format is not supported.");
+        return $this->parsers[$format]->getClient($format);
     }
 
 }
