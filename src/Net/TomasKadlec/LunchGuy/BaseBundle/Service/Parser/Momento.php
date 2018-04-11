@@ -1,28 +1,28 @@
 <?php
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser;
 
+use Symfony\Component\DomCrawler\Crawler;
+
 /**
- * Class Gth
+ * Class Momento
  *
- * Parser implementation for 
+ * Parser implementation for
  *
  * @package Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser
  */
-class Gth extends AbstractParser
+class Momento extends AbstractParser
 {
 
-    protected $filter = [];
-
-    protected static $selector = 'div#menu_1 ul.foodmenu li.food';
+    protected static $selector = 'div.list-content div.food-list-block div.show table + table tr';
 
     public function isSupported($format)
     {
-        return ($format == 'gth');
+        return ($format == 'momento');
     }
 
     public function supports()
     {
-        return [ 'gth' ];
+        return [ 'momento' ];
     }
 
     /**
@@ -34,39 +34,34 @@ class Gth extends AbstractParser
     protected function process($data) {
         $result = [];
 
-        foreach ($data as $row) {
+        foreach ($data as $food) {
             $key = null;
-            if (empty($row))
+            if (empty($food))
                 continue;
 
-
-            $food = array_values(array_map(function($e) {
-                return preg_replace('/^\s*(.*)\s*$/u', '$1', $e);
-            }, array_filter(explode("\n", $row[0]), function($e) {
-                return !preg_match('/^\s*$/u', $e);
-            })));
 
             if(count($food) !== 5) {
                 continue;
             }
 
-            if (preg_match('/Polévka/', $food[0]))
+            if (preg_match('/Polévka/ui', $food[0]))
                 $key = static::KEY_SOUPS;
-            else if (preg_match('/(Menu)|(Minutka)/', $food[0]))
+            else if (preg_match('/(Menu)|(Minutka)/ui', $food[0]))
                 $key = static::KEY_MAIN;
-            else if (preg_match('/(Teplý pult)/', $food[0]))
+            else if (preg_match('/(Teplý pult)/ui', $food[0]))
                 $key = 'Teplý pult';
-            else if (preg_match('/Zeleninový talíř/', $food[0]))
+            else if (preg_match('/(Zeleninový talíř|Salát)/ui', $food[0]))
                 $key = static::KEY_SALADS;
 
             if ($key !== null && isset($food[1]) && isset($food[4])) {
                 $result[$key][] = [
-                    $food[1],
+                    $food[2],
                     intval($food[4])
                 ];
             }
         }
         return $result;
     }
-
 }
+
+//Zeleninový salát se smaženými kuřecími stripsy 1,3,7,12

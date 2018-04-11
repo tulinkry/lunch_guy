@@ -65,6 +65,11 @@ parameters:
                 parser: gth
                 web: 'http://www.gth.cz/bbc-filadelfie'
                 address: null
+            'Momento Alpha':
+                uri: 'http://www.momentoalpha.cz/'
+                parser: momento
+                web: 'http://www.momentoalpha.cz/'
+                address: null
         output:
             stdout: 'yes'
             slack:
