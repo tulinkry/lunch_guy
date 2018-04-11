@@ -13,7 +13,7 @@ class Gth extends AbstractParser
 
     protected $filter = [];
 
-    protected static $selector = 'div.sub_page ul.foodmenu li.food';
+    protected static $selector = 'div#menu_1 ul.foodmenu li.food';
 
     public function isSupported($format)
     {
@@ -39,25 +39,30 @@ class Gth extends AbstractParser
             if (empty($row))
                 continue;
 
-            $food = array_map(function($e) {
+
+            $food = array_values(array_map(function($e) {
                 return preg_replace('/^\s*(.*)\s*$/u', '$1', $e);
             }, array_filter(explode("\n", $row[0]), function($e) {
                 return !preg_match('/^\s*$/u', $e);
-            }));
+            })));
 
-            if (preg_match('/Polévka/', $food[4]))
+            if(count($food) !== 5) {
+                continue;
+            }
+
+            if (preg_match('/Polévka/', $food[0]))
                 $key = 'Polévky';
-            else if (preg_match('/(Menu)|(Minutka)/', $food[4]))
+            else if (preg_match('/(Menu)|(Minutka)/', $food[0]))
                 $key = 'Hlavní jídla';
-            else if (preg_match('/(Teplý pult)/', $food[4]))
+            else if (preg_match('/(Teplý pult)/', $food[0]))
                 $key = 'Teplý pult';
-            else if (preg_match('/Zeleninový talíř/', $food[4]))
+            else if (preg_match('/Zeleninový talíř/', $food[0]))
                 $key = 'Saláty';
 
-            if ($key !== null) {
+            if ($key !== null && isset($food[1]) && isset($food[4])) {
                 $result[$key][] = [
-                    $food[7],
-                    intval($food[19])
+                    $food[1],
+                    intval($food[4])
                 ];
             }
         }
