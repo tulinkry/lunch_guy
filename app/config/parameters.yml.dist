@@ -30,11 +30,6 @@ parameters:
                 parser: ccibule
                 web: 'http://www.cervena-cibule.cz/'
                 address: null
-            'Restaurace Nesmysl':
-                uri: 'https://www.menicka.cz/2279-restaurant-ne---smysl.html'
-                parser: menicka
-                web: null
-                address: null
             'Perfect Canteen - Moneta':
                 uri: 'https://www.menicka.cz/4235--perfect-canteen---moneta.html'
                 parser: menicka
@@ -45,16 +40,6 @@ parameters:
                 parser: zomato
                 web: null
                 address: null
-#            'U Čejpů':
-#                uri: 'https://www.ucejpu.cz/restauracesalanda.php'
-#                parser: ucejpu
-#                web: 'https://www.ucejpu.cz/'
-#                address: null
-#            Mattes:
-#                uri: 'http://www.mattesrestaurace.cz/'
-#                parser: mattes
-#                web: 'http://www.mattesrestaurace.cz/'
-#                address: null
             Beta:
                 uri: 'http://www.gth.cz/bbc-beta/jidelni-listek'
                 parser: gth
@@ -69,6 +54,21 @@ parameters:
                 uri: 'http://www.momentoalpha.cz/'
                 parser: momento
                 web: 'http://www.momentoalpha.cz/'
+                address: null
+            'Restaurace Nesmysl':
+                uri: 'https://www.menicka.cz/2279-restaurant-ne---smysl.html'
+                parser: menicka
+                web: null
+                address: null
+            'U Čejpů':
+                uri: 'https://www.menicka.cz/4213-salanda-u-cejpu.html'
+                parser: menicka
+                web: 'https://www.ucejpu.cz/'
+                address: null
+            Mattes:
+                uri: 'https://www.menicka.cz/2133-mattes-restaurace.html'
+                parser: menicka
+                web: 'http://www.mattesrestaurace.cz/'
                 address: null
         output:
             stdout: 'yes'
