@@ -7,7 +7,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class Zomato extends AbstractParser {
 
-    protected static $selector = '#menu-preview .tmi-groups .tmi-group .tmi-daily';
+    protected static $selector = '#menu-preview .tmi-groups .tmi-group';
 
     public function isSupported($format) {
         return ($format == 'zomato');
@@ -20,12 +20,31 @@ class Zomato extends AbstractParser {
     public function parse($format, $data, $charset = 'UTF-8') {
         if (!$this->isSupported($format))
             return new RuntimeException("Format {$format} is not supported.");
+
         $data = $this
                 ->getCrawler($data, $charset)
                 ->filter(static::$selector)
                 ->each(function (Crawler $node) {
-            return $node->text();
+                    $todayText = $node->filter('.tmi-group-name')
+                        ->each(function (Crawler $node) {
+                            return $node->text();
+                        });
+
+                    if(!preg_match("/\(dnes\)/", $todayText[0]))
+                        return [];
+
+
+                    return $node->filter('.tmi-daily')->each(function($node) {
+                        return $node->text();
+                    });
         });
+
+        if(!$data || count($data) == 0) {
+            return [];
+        }
+
+        $data = array_values($data)[0];
+
         return $this->process($data);
     }
 
@@ -42,11 +61,20 @@ class Zomato extends AbstractParser {
         foreach ($data as $row) {
             if (empty($row) || preg_match("/^\s*$/u", $row))
                 continue;
+
+            // alergens
             if (preg_match("/^\s*(\d+,?)+\s*\$/u", $row))
                 continue;
 
+            // some fake character
+            if (preg_match("/^\s*¨+\s*\$/u", $row))
+                continue;
+
+            // remove meal numbers
             $row = preg_replace("/^\s*P\d+(.*)/ui", '$1', $row);
             $row = preg_replace("/^\s*M\d+(.*)/ui", '$1', $row);
+            // remove grams
+            $row = preg_replace("/^\s*\d+g/ui", '', $row);
 
             if (preg_match('/POLÉVKY/ui', $row)) {
                 $key = static::KEY_SOUPS;
@@ -81,6 +109,19 @@ class Zomato extends AbstractParser {
      * @return mixed the HTTP client
      */
     public function getClient($format) {
+        if (!$this->isSupported($format))
+            return new \RuntimeException("Format {$format} is not supported.");
+
+        $cmd = 'curl -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0"';
+        return new CurlClient($cmd);
+    }
+
+    /**
+     * Return parser specific client for issuing HTTP requests.
+     *
+     * @return mixed the HTTP client
+     */
+    public function getLibCurlClient($format) {
         if (!$this->isSupported($format))
             return new \RuntimeException("Format {$format} is not supported.");
         $headers = array();
@@ -134,6 +175,31 @@ class Response {
     }
 
 }
+
+class CurlClient {
+    private $command;
+
+    /**
+     * CurlClient constructor.
+     * @param $command
+     */
+    public function __construct($command)
+    {
+        $this->command = $command;
+    }
+
+    public function request($method, $uri, $data = []) {
+        $command = $this->command . "-X '" . escapeshellcmd($method) . "' '" . escapeshellcmd($uri) . "'";
+        exec($command, $output, $return_val);
+
+        if($return_val !== 0) {
+            return new Response(404, new Body(''));
+        }
+
+        return new Response(200, new Body(implode("\n", $output)));
+    }
+}
+
 
 class Client {
 
