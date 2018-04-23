@@ -1,5 +1,6 @@
 <?php
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser;
+use DateTime;
 
 /**
  * Class Gth
@@ -13,7 +14,7 @@ class Gth extends AbstractParser
 
     protected $filter = [];
 
-    protected static $selector = 'div#menu_1 ul.foodmenu li.food';
+    protected static $selector = 'div#menu_1 ul.foodmenu li.food, div#menu_1 ul.foodmenu li.day';
 
     public function isSupported($format)
     {
@@ -34,17 +35,35 @@ class Gth extends AbstractParser
     protected function process($data) {
         $result = [];
 
+        $today = false;
         foreach ($data as $row) {
             $key = null;
             if (empty($row))
                 continue;
-
 
             $food = array_values(array_map(function($e) {
                 return preg_replace('/^\s*(.*)\s*$/u', '$1', $e);
             }, array_filter(explode("\n", $row[0]), function($e) {
                 return !preg_match('/^\s*$/u', $e);
             })));
+
+            if(count($food) === 1) {
+                // date
+                list($day, $date) = explode(' ', $food[0]);
+                $date = DateTime::createFromFormat('j.n.Y', $date);
+                if ($date !== false &&
+                    ($date->getTimestamp() - (new DateTime('today'))->getTimestamp()) >= 0 &&
+                    ($date->getTimestamp() - (new DateTime('today'))->getTimestamp()) <= (24 * 60 * 60)) {
+                    $today = true;
+                } else {
+                    $today = false;
+                }
+                continue;
+            }
+
+            if(!$today) {
+                continue;
+            }
 
             if(count($food) !== 5) {
                 continue;
