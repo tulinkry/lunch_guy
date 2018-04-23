@@ -59,9 +59,6 @@ class Menicka extends AbstractParser
                             $price = intval($tmp->nodeValue);
                         }
 
-                        
-
-
                         if(!is_null($food) && !is_null($price)) {
                             $results[$key][] = array($food, $price);
                             $food = $price = null;
@@ -88,5 +85,3 @@ class Menicka extends AbstractParser
         return $data;
     }
 }
-
-//Zeleninový salát se smaženými kuřecími stripsy 1,3,7,12
