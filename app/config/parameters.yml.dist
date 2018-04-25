@@ -55,6 +55,11 @@ parameters:
                 parser: momento
                 web: 'http://www.momentoalpha.cz/'
                 address: null
+            'Restaurace Na kopečku':
+                uri: 'http://www.restaurace-nakopecku.cz/'
+                parser: nakopecku
+                web: 'http://www.restaurace-nakopecku.cz/'
+                address: null
             'Restaurace Nesmysl':
                 uri: 'https://www.menicka.cz/2279-restaurant-ne---smysl.html'
                 parser: menicka
