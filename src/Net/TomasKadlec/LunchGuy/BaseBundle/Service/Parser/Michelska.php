@@ -51,7 +51,10 @@ class Michelska extends AbstractParser
             if(preg_match('/polévky/ui', $row[1])) {
                 $key = static::KEY_SOUPS;
                 continue;
-            } else if (preg_match('/salát/ui', $row[1]) ||
+            } else if (preg_match('/salát/ui', $row[1])) {
+                $key = static::KEY_SALADS;
+                continue;
+            } else if (
                        preg_match('/bezlepková  nabídka/ui', $row[1]) ||
                        preg_match('/zvýhodněné menu/ui', $row[1]) ||
                        preg_match('/hotových jídel/ui', $row[1]) ||
