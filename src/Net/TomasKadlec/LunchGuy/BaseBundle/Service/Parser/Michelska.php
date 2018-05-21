@@ -48,17 +48,17 @@ class Michelska extends AbstractParser
         $key = null;
         $result = [];
         foreach ($data as $row) {
-            if(preg_match('/polévky/ui', $row[1])) {
+            if(preg_match('/^\s*polévky/ui', $row[1])) {
                 $key = static::KEY_SOUPS;
                 continue;
-            } else if (preg_match('/salát/ui', $row[1])) {
+            } else if (preg_match('/^\s*salát/ui', $row[1])) {
                 $key = static::KEY_SALADS;
                 continue;
             } else if (
-                       preg_match('/bezlepková\s*nabídka/ui', $row[1]) ||
-                       preg_match('/zvýhodněné\s*menu/ui', $row[1]) ||
-                       preg_match('/hotových\s*jídel/ui', $row[1]) ||
-                       preg_match('/specialita\s*dne/ui', $row[1])) {
+                       preg_match('/^\s*bezlepková\s*nabídka/ui', $row[1]) ||
+                       preg_match('/^\s*zvýhodněné\s*menu/ui', $row[1]) ||
+                       preg_match('/^\s*hotových\s*jídel/ui', $row[1]) ||
+                       preg_match('/^\s*specialita\s*dne/ui', $row[1])) {
                 $key = static::KEY_MAIN;
                 continue;
             } else if (preg_match('/^\s*\(.*\)\s*$/ui', $row[1]) ||
