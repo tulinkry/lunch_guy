@@ -8,12 +8,6 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class Kulatak extends AbstractParser
 {
-
-    const FILTERS = [
-        '^[[:space:]]+',
-        '[[:space:]]+$',
-    ];
-
     /** @inheritdoc */
     public function parse($format, $data, $charset = 'UTF-8')
     {
@@ -46,7 +40,7 @@ class Kulatak extends AbstractParser
                         }
 
                         $meal = $crawler->filter('td > div.nadpis.first')->first()->text();
-                        foreach (static::FILTERS as $pattern) {
+                        foreach (['^[[:space:]]+', '[[:space:]]+$'] as $pattern) {
                             $meal = mb_ereg_replace($pattern, '', $meal);
                         }
 
