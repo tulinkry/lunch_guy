@@ -60,6 +60,11 @@ parameters:
                 parser: expressgrill
                 web: 'https://sites.google.com/sandwich.cz/egmenu/home'
                 address: null
+            'Nola':
+                uri: 'http://www.nola.cz/'
+                parser: nola
+                web: 'http://www.nola.cz/'
+                address: null
             'Restaurace Na kopečku':
                 uri: 'http://www.restaurace-nakopecku.cz/'
                 parser: nakopecku
