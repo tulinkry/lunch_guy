@@ -54,8 +54,12 @@ class Menicka extends AbstractParser
                         if(strpos($tmp->getAttribute('class'), 'nabidka_1') !== false ||
                            strpos($tmp->getAttribute('class'), 'nabidka_2') !== false) {
                             $food = trim($tmp->nodeValue);
-                            $food = preg_replace('/\(?(\d+\s*,)*(\s*\d+\s*)*\)?\s*$/', '', $food);
+                            // alergens
+                            $food = preg_replace('/\(?(\d+[a-z]?\s*,)*(\s*\d+[a-z]?\s*)*\)?\s*$/', '', $food);
+                            // weight
                             $food = preg_replace('/\d+g\s*-\s*/', '', $food);
+                            // weight
+                            $food = preg_replace('/^\s*\d+g\s*/', '', $food);
                             $key = strpos($tmp->getAttribute('class'), 'capitalize') === false ? static::KEY_MAIN : static::KEY_SOUPS;
                         } else if (strpos($tmp->getAttribute('class'), 'cena') !== false) {
                             $price = intval($tmp->nodeValue);
