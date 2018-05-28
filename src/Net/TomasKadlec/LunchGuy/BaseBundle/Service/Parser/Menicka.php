@@ -56,6 +56,9 @@ class Menicka extends AbstractParser
                             $food = trim($tmp->nodeValue);
                             // alergens
                             $food = preg_replace('/\(?(\d+[a-z]?\s*,)*(\s*\d+[a-z]?\s*)*\)?\s*$/', '', $food);
+                            // other stuff
+                            $food = preg_replace('/\(MB\s+[^)]*\)\s*$/', '', $food);
+                            $food = preg_replace('/\(MB\s*$/', '', $food);
                             // weight
                             $food = preg_replace('/\d+g\s*-\s*/', '', $food);
                             // weight
