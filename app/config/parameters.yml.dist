@@ -70,6 +70,11 @@ parameters:
                 parser: restu
                 web: 'https://www.restu.cz/o-sole-mio/menu/'
                 address: null
+            'Puzzle Salads':
+                uri: 'http://pasta.puzzlesalads.cz/'
+                parser: puzzle
+                web: 'http://pasta.puzzlesalads.cz/'
+                address: null
             'Restaurace Na kopečku':
                 uri: 'http://www.restaurace-nakopecku.cz/'
                 parser: nakopecku
