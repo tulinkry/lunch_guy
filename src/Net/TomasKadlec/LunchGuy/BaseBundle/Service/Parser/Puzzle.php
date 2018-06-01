@@ -61,10 +61,9 @@ class Puzzle extends AbstractParser
 
             $food = trim($row[1]);
             $food = preg_replace('/\s*\d+\s*\.\s*/', '', $food);
-            $food = ucfirst(trim($row[2])) . ' - ' . $food;
             $price = intval($row[3]);
 
-            $key = static::KEY_MAIN;
+            $key = ucfirst(trim($row[2]));
 
             if ($key !== null) {
                 $result[$key][] = [
