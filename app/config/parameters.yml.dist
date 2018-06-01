@@ -33,7 +33,7 @@ parameters:
             'Perfect Canteen - Moneta':
                 uri: 'https://www.menicka.cz/4235--perfect-canteen---moneta.html'
                 parser: menicka
-                web: null
+                web: 'http://www.perfectcanteen.cz/nase-kantyny/moneta-money-bank'
                 address: null
             'Restaurace Alfa':
                 uri: 'https://www.zomato.com/cs/praha/restaurace-alfa-michle-praha-4/denn%%C3%%AD-menu'
@@ -83,7 +83,7 @@ parameters:
             'Restaurace Nesmysl':
                 uri: 'https://www.menicka.cz/2279-restaurant-ne---smysl.html'
                 parser: menicka
-                web: null
+                web: 'http://www.restaurantnesmysl.cz/'
                 address: null
             'U Čejpů':
                 uri: 'https://www.menicka.cz/4213-salanda-u-cejpu.html'
