@@ -7,6 +7,7 @@
  */
 
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Application;
+
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ApplicationInterface;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\OutputInterface;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ParserInterface;
@@ -35,7 +36,7 @@ class Application implements ApplicationInterface
      * @var ParserInterface
      */
     protected $parser;
-    
+
     /**
      * @inheritdoc
      */
@@ -44,6 +45,18 @@ class Application implements ApplicationInterface
         $restaurants = $this->configRestaurants();
         if (is_array($restaurants))
             return array_keys($restaurants);
+        else
+            return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getRestaurantsWithDetails()
+    {
+        $restaurants = $this->configRestaurants();
+        if (is_array($restaurants))
+            return $restaurants;
         else
             return [];
     }
@@ -111,7 +124,8 @@ class Application implements ApplicationInterface
      * @param $restaurantId
      * @return array
      */
-    public function retrieve($restaurantId) {
+    public function retrieve($restaurantId)
+    {
         $configuration = $this->configRestaurant($restaurantId);
 
         $response = $this->parser->getClient($configuration['parser'])->request('GET', $configuration['uri']);
@@ -138,7 +152,8 @@ class Application implements ApplicationInterface
     /**
      * @inheritdoc
      */
-    public function output($restaurantId, $output, array $options = []) {
+    public function output($restaurantId, $output, array $options = [])
+    {
         $menu = $this->retrieve($restaurantId);
         $this->output->send($output, $restaurantId, $menu,
             array_merge(
@@ -202,7 +217,7 @@ class Application implements ApplicationInterface
     protected function configRestaurant($restaurantId)
     {
         if (!isset($this->configuration['restaurants'][$restaurantId])) {
-            throw new \RuntimeException('No such restaurant '. $restaurantId .' is configured.');
+            throw new \RuntimeException('No such restaurant ' . $restaurantId . ' is configured.');
         }
         return $this->configuration['restaurants'][$restaurantId];
     }
@@ -237,7 +252,7 @@ class Application implements ApplicationInterface
     protected function configOutput($output)
     {
         if (!isset($this->configuration['output'][$output])) {
-            throw new \RuntimeException('No such output '. $output .' configured.');
+            throw new \RuntimeException('No such output ' . $output . ' configured.');
         }
         return $this->configuration['output'][$output];
     }

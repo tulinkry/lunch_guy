@@ -118,6 +118,14 @@ body > footer > div.container > nav:not(:first-child) > ul > li {
     margin: 0.25em 0 0.25em 0.5em;
 }
 
+.item h2 a:link {
+    color: #0000EE;
+}
+
+.item h2 a:visited {
+    color: #551A8B;
+}
+
 .item table {
     width: 100%;
     border-spacing: 0;

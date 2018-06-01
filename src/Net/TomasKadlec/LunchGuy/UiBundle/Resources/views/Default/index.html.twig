@@ -13,7 +13,11 @@
 <div class="container">
     {% for restaurantId in restaurants %}
     <div class="item">
-        <h2>{{ restaurantId }}</h2>
+        {% if details[restaurantId]['web'] is defined and details[restaurantId]['web'] is not empty %}
+        <h2><a href="{{ details[restaurantId]['web'] }}" target="_blank" title="{{ restaurantId }}">{{ restaurantId }}</a></h2>
+        {% else %}
+            <h2>{{ restaurantId }}</h2>
+        {% endif %}
 
         <div class="restaurant" data-url="{{ path('net_tomaskadlec_lunchguy_ui_default_restaurant', { 'restaurantId': restaurantId })  }}">Načítá se ...</div>
     </div>

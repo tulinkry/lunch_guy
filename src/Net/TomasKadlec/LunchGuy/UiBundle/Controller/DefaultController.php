@@ -48,6 +48,7 @@ class DefaultController extends Controller
     {
         return [
             'restaurants' => $this->getApplication()->getRestaurants(),
+            'details' => $this->getApplication()->getRestaurantsWithDetails(),
         ];
     }
 
