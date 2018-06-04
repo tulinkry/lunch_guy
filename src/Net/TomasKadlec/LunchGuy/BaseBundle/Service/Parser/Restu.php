@@ -89,6 +89,8 @@ class Restu extends AbstractParser
                             $key = 'Pizza';
                         }
 
+                        $food = preg_replace('/\(?(\d+[a-z]?\s*,)*(\s*\d+[a-z]?\s*)*\)?\s*$/', '', $food);
+
                         $results[$key][] = array($food, $price);
                         $food = $price = null;
                     }
