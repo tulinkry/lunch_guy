@@ -45,6 +45,11 @@ parameters:
                 parser: gth
                 web: 'http://www.gth.cz/bbc-beta'
                 address: null
+            Delta:
+                uri: 'http://www.momentodelta.cz/'
+                parser: momento
+                web: 'http://www.momentodelta.cz/'
+                address: null
             Filadelfie:
                 uri: 'http://www.gth.cz/bbc-filadelfie/jidelni-listek'
                 parser: gth
