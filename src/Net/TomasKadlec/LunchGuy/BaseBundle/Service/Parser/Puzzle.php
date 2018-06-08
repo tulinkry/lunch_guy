@@ -63,9 +63,11 @@ class Puzzle extends AbstractParser
             }
             if(isset($key) && $key !== null && $food[0] !== 'key') {
                 $food[2] = $key; // type
-                if(preg_match_all('/^\s*(.*?)\s+\(?(\d+[a-z]?\s*,)*(\s*\d+[a-z]?)?\)?\s+(\d+)\s*Kč\s*$/ui', $food[1], $matches)) {
+                if(preg_match_all('/^\s*(.*?)\s+(\(?(\d+[a-z]?\s*,)*(\s*\d+[a-z]?)?\)?\s+)?(\d+)\s*Kč\s*$/ui', $food[1], $matches)) {
                     $food[1] = $matches[1][0]; // food
-                    $food[3] = $matches[4][0]; // price
+                    $food[3] = $matches[5][0]; // price
+                } else {
+                    unset($daily[$i]);
                 }
             }
         }
