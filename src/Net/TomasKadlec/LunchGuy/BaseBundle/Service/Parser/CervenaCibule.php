@@ -34,7 +34,7 @@ class CervenaCibule extends AbstractParser
             ->getCrawler($data, $charset)
             ->filter(static::$selector)
             ->each(function (Crawler $node) {
-                if ($node->nodeName() == 'h3')
+                if (in_array($node->nodeName(), ['h1', 'h2', 'h3', 'h4']))
                     return (object) [ 'type' => self::HEADING, 'text' => trim($node->text()) ];
                 else if ($node->nodeName() == 'p')
                     return (object) [ 'type' => self::FOOD, 'text' => trim($node->text()) ];
@@ -71,8 +71,8 @@ class CervenaCibule extends AbstractParser
                 $key = null;
             else if ($key !== null) {
                 $result[$key][] = [
-                    preg_replace("/\d+(,-|\s*Kč).*/", '', trim($row->text)),
-                    (!empty($row->text) ? intval(preg_replace("/.*?(\d+)(,-|\s*Kč)/", '$1', trim($row->text))) : '-')
+                    preg_replace("/\d+(-|,-|\s*Kč).*/", '', trim($row->text)),
+                    (!empty($row->text) ? intval(preg_replace("/.*?(\d+)(-|,-|\s*Kč)/", '$1', trim($row->text))) : '-')
                 ];
             }
         }
