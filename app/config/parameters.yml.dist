@@ -40,6 +40,11 @@ parameters:
                 parser: zomato
                 web: null
                 address: null
+            Alpha:
+                uri: 'http://www.momentoalpha.cz/'
+                parser: momento
+                web: 'http://www.momentoalpha.cz/'
+                address: null
             Beta:
                 uri: 'http://www.gth.cz/bbc-beta/jidelni-listek'
                 parser: gth
@@ -54,11 +59,6 @@ parameters:
                 uri: 'http://www.gth.cz/bbc-filadelfie/jidelni-listek'
                 parser: gth
                 web: 'http://www.gth.cz/bbc-filadelfie'
-                address: null
-            'Momento Alpha':
-                uri: 'http://www.momentoalpha.cz/'
-                parser: momento
-                web: 'http://www.momentoalpha.cz/'
                 address: null
             'Express Grill':
                 uri: 'https://sites.google.com/sandwich.cz/egmenu/home'
