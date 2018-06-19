@@ -1,7 +1,12 @@
-app:
-  build: docker
-  ports:
-    - "8001:80"
-  volumes:
-    - ".:/usr/src/app"
-    - "./var:/usr/src/app/var:delegated"
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8001:80"
+    volumes:
+      - "./app:/usr/src/app/app"
+      - "./src:/usr/src/app/src"
+      - "./web:/usr/src/app/web"

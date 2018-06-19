@@ -12,9 +12,10 @@ WORKDIR /usr/bin
 RUN curl -sS https://getcomposer.org/installer | php
 
 WORKDIR $WWW_DIR
+COPY . $WWW_DIR
 
 EXPOSE 80
 
-ADD . /docker
+ADD ./docker /docker
 RUN chmod -R +x /docker
 CMD ["/docker/start.sh"]
