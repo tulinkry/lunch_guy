@@ -26,7 +26,7 @@ class ExpressGrill extends AbstractParser
             ->getCrawler($data, $charset)
             ->filter(static::$selector)
             ->each(function (Crawler $node) {
-                if((preg_match_all('/^(\d+\.\s*)?(.*)\s+(\d+kč)$/', $node->text(),$matches))) {
+                if((preg_match_all('/^\s*(\d+\.\s*)?(.*)\s+(\d+\s*(Kč|kč))\s*$/', $node->text(),$matches))) {
                     return [$matches[2][0], $matches[3][0]];
                 }
                 return [];
