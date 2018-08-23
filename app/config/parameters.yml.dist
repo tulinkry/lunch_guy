@@ -46,7 +46,7 @@ parameters:
                 web: 'http://www.momentoalpha.cz/'
                 address: null
             Beta:
-                uri: 'http://www.gth.cz/bbc-beta/jidelni-listek'
+                uri: 'http://gth.cz/provoz/bbc-beta?do=dishesListLink'
                 parser: gth
                 web: 'http://www.gth.cz/bbc-beta'
                 address: null
@@ -56,7 +56,7 @@ parameters:
                 web: 'http://www.momentodelta.cz/'
                 address: null
             Filadelfie:
-                uri: 'http://www.gth.cz/bbc-filadelfie/jidelni-listek'
+                uri: 'http://gth.cz/provoz/bbc-filadelfie?do=dishesListLink'
                 parser: gth
                 web: 'http://www.gth.cz/bbc-filadelfie'
                 address: null

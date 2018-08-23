@@ -1,11 +1,15 @@
 <?php
+
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser;
+
 use DateTime;
+use GuzzleHttp\Client;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class Gth
  *
- * Parser implementation for 
+ * Parser implementation for
  *
  * @package Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser
  */
@@ -14,7 +18,7 @@ class Gth extends AbstractParser
 
     protected $filter = [];
 
-    protected static $selector = 'div#menu_1 ul.foodmenu li.food, div#menu_1 ul.foodmenu li.day';
+    protected static $selector = '.dishes_list_wrapper .day_wrapper .meat_wrapper';
 
     public function isSupported($format)
     {
@@ -23,7 +27,39 @@ class Gth extends AbstractParser
 
     public function supports()
     {
-        return [ 'gth' ];
+        return ['gth'];
+    }
+
+    /** @inheritdoc */
+    public function parse($format, $data, $charset = 'UTF-8')
+    {
+        if (!$this->isSupported($format))
+            return new \RuntimeException("Format {$format} is not supported.");
+
+        $date = $this
+            ->getCrawler($data, $charset)
+            ->filter('.dishes_list_wrapper .day_wrapper h4')
+            ->each(function (Crawler $node) {
+                return $node->children()->each(function (Crawler $child) {
+                    return $child->text();
+                });
+            });
+
+        if (count($date) === 0 || count($date[0]) === 0) {
+            // no date
+            return [];
+        }
+
+        list($day, $date) = explode(' - ', $date[0][0]);
+        $date = DateTime::createFromFormat('j.n.Y', $date);
+        if ($date === false ||
+            ($date->getTimestamp() - (new DateTime('today'))->getTimestamp()) < 0 ||
+            ($date->getTimestamp() - (new DateTime('today'))->getTimestamp()) > (24 * 60 * 60)) {
+            // date is not today
+            return [];
+        }
+
+        return parent::parse($format, $data, $charset);
     }
 
     /**
@@ -32,60 +68,64 @@ class Gth extends AbstractParser
      * @param $data
      * @return array
      */
-    protected function process($data) {
+    protected function process($data)
+    {
         $result = [];
-
-        $today = false;
         foreach ($data as $row) {
             $key = null;
+
             if (empty($row))
                 continue;
 
-            $food = array_values(array_map(function($e) {
-                return preg_replace('/^\s*(.*)\s*$/u', '$1', $e);
-            }, array_filter(explode("\n", $row[0]), function($e) {
-                return !preg_match('/^\s*$/u', $e);
-            })));
 
-            if(count($food) === 1) {
-                // date
-                list($day, $date) = explode(' ', $food[0]);
-                $date = DateTime::createFromFormat('j.n.Y', $date);
-                if ($date !== false &&
-                    ($date->getTimestamp() - (new DateTime('today'))->getTimestamp()) >= 0 &&
-                    ($date->getTimestamp() - (new DateTime('today'))->getTimestamp()) <= (24 * 60 * 60)) {
-                    $today = true;
-                } else {
-                    $today = false;
-                }
+            if (count($row) !== 3) {
                 continue;
             }
 
-            if(!$today) {
-                continue;
-            }
-
-            if(count($food) !== 5) {
-                continue;
-            }
-
-            if (preg_match('/Polévka/', $food[0]))
+            if (preg_match('/Polévka/', $row[0]))
                 $key = static::KEY_SOUPS;
-            else if (preg_match('/(Menu)|(Minutka)/', $food[0]))
+            else if (preg_match('/(Menu)|(Minutka)/', $row[0]))
                 $key = static::KEY_MAIN;
-            else if (preg_match('/(Teplý pult)/', $food[0]))
+            else if (preg_match('/(Teplý pult)/', $row[0]))
                 $key = 'Teplý pult';
-            else if (preg_match('/Zeleninový talíř/', $food[0]))
+            else if (preg_match('/Zeleninový talíř/', $row[0]))
                 $key = static::KEY_SALADS;
 
-            if ($key !== null && isset($food[1]) && isset($food[4])) {
+            $row[0] = preg_replace('/Polévka\s*\d*\s*/', '', $row[0]);
+            $row[0] = preg_replace('/((Menu)|(Minutka))\s*\d*\s*/', '', $row[0]);
+            $row[0] = preg_replace('/(Teplý pult)\s*\d*\s*/', '', $row[0]);
+            $row[0] = preg_replace('/Zeleninový talíř\s*\d*\s*/', '', $row[0]);
+
+            if ($key !== null && isset($row[0]) && isset($row[2])) {
                 $result[$key][] = [
-                    $food[1],
-                    intval($food[4])
+                    $row[0],
+                    intval($row[2])
                 ];
             }
         }
         return $result;
     }
 
+    /**
+     * Return parser specific client for issuing HTTP requests.
+     *
+     * @return Client the HTTP client
+     */
+    public function getClient($format)
+    {
+        if (!$this->isSupported($format))
+            return new \RuntimeException("Format {$format} is not supported.");
+
+        $headers = array();
+        $headers[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0";
+        $headers[] = "X-Requested-With: XMLHttpRequest";
+
+        $client = new Client([
+            // 'debug' => true,
+            'curl' => [
+                CURLOPT_HTTPHEADER => $headers
+            ],
+        ]);
+        return $client;
+    }
 }

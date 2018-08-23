@@ -57,7 +57,7 @@ abstract class AbstractParser implements ParserInterface {
     /**
      * Return parser specific client for issuing HTTP requests.
      * 
-     * @return mixed the HTTP client
+     * @return Client the HTTP client
      */
     public function getClient($format) {
         if (!$this->isSupported($format))
