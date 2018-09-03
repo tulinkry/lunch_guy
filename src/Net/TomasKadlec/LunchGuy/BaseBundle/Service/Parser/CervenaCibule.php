@@ -34,10 +34,14 @@ class CervenaCibule extends AbstractParser
             ->getCrawler($data, $charset)
             ->filter(static::$selector)
             ->each(function (Crawler $node) {
-                if (in_array($node->nodeName(), ['h1', 'h2', 'h3', 'h4']))
-                    return (object) [ 'type' => self::HEADING, 'text' => trim($node->text()) ];
-                else if ($node->nodeName() == 'p')
-                    return (object) [ 'type' => self::FOOD, 'text' => trim($node->text()) ];
+                if (in_array($node->nodeName(), ['h1', 'h2', 'h3', 'h4'])) {
+                    return (object)['type' => self::HEADING, 'text' => trim($node->text())];
+                } else if ($node->nodeName() == 'p') {
+                    if ($node->children()->filter('span')->count() > 0) {
+                        return (object)['type' => self::HEADING, 'text' => trim($node->text())];
+                    }
+                    return (object)['type' => self::FOOD, 'text' => trim($node->text())];
+                }
             });
         return $this->process($data);
     }
@@ -65,7 +69,7 @@ class CervenaCibule extends AbstractParser
                 else if (preg_match('/Hlavní jídlo/', $row->text))
                     $key = static::KEY_MAIN;
                 else
-                    $target = null;
+                    $key = null;
                 //continue;
             } else if (preg_match('/vyhrazena/', $row->text))
                 $key = null;
