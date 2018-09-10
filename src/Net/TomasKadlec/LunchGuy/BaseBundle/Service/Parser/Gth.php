@@ -105,27 +105,4 @@ class Gth extends AbstractParser
         }
         return $result;
     }
-
-    /**
-     * Return parser specific client for issuing HTTP requests.
-     *
-     * @return Client the HTTP client
-     */
-    public function getClient($format)
-    {
-        if (!$this->isSupported($format))
-            return new \RuntimeException("Format {$format} is not supported.");
-
-        $headers = array();
-        $headers[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:59.0) Gecko/20100101 Firefox/59.0";
-        $headers[] = "X-Requested-With: XMLHttpRequest";
-
-        $client = new Client([
-            // 'debug' => true,
-            'curl' => [
-                CURLOPT_HTTPHEADER => $headers
-            ],
-        ]);
-        return $client;
-    }
 }
