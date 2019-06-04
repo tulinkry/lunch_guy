@@ -1,4 +1,4 @@
-FROM php:7-cli
+FROM php:7.1-cli
 MAINTAINER Kryštof Tulinger <k.tulinger@seznam.cz>
 
 ENV WWW_DIR /usr/src/app
