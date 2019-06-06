@@ -60,11 +60,6 @@ parameters:
                 parser: menicka
                 web: 'https://www.corleone.cz/pizzeria-arkady/menu'
                 address: null
-            Polífkárna:
-                uri: 'http://www.polifkarna.com/tydenni-nabidka'
-                parser: polifkarna
-                web: 'http://www.polifkarna.com/tydenni-nabidka'
-                address: null
 #            'Restaurace Michelská':
 #                uri: 'http://www.michelska.cz/dnes.htm'
 #                parser: michelska
