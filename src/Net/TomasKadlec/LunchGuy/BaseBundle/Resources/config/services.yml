@@ -164,6 +164,11 @@ services:
     tags:
       - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
 
+  net_tomas_kadlec_lunch_guy_base.service_parser.coolna:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\Coolna
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
+
   net_tomas_kadlec_lunch_guy_base.service.output:
     class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Output
 

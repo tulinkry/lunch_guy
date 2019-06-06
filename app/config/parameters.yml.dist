@@ -45,6 +45,11 @@ parameters:
                 parser: dicarlo
                 web: 'https://www.dicarlo.cz/pankrac/denni-menu/'
                 address: null
+            Coolna:
+                uri: 'https://www.coolna.in/inpage/poledni-nabidky/'
+                parser: coolna
+                web: 'https://www.coolna.in/inpage/poledni-nabidky/'
+                address: null
             Enterprise:
                 uri: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
                 parser: praguecatering
