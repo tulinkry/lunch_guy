@@ -40,6 +40,11 @@ parameters:
                 parser: pankrackyrynek
                 web: 'http://www.pankrackyrynek.cz/tydenni-menu-rynek'
                 address: null
+            'Di Carlo':
+                uri: 'https://www.dicarlo.cz/pankrac/denni-menu/'
+                parser: dicarlo
+                web: 'https://www.dicarlo.cz/pankrac/denni-menu/'
+                address: null
             Enterprise:
                 uri: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
                 parser: praguecatering
@@ -139,7 +144,7 @@ parameters:
             stdout: 'yes'
             slack:
                 uri: null
-                channel: '#general'
+                channel: '#prague'
                 username: obědář
                 icon_emoji: ':stew:'
 
