@@ -79,12 +79,16 @@ class PankrackyRynek extends AbstractParser
                 return $acc;
             }
 
-            if($acc->processing) {
-                //print_r(explode('<br>', $el));
-                foreach(explode('<br>', $el) as $k => $food) {
-                    if(strpos($food, 'STÁLÁ NABÍDKA') > 0) {
+            if ($acc->processing) {
+                foreach (explode('<br>', $el) as $k => $food) {
+                    if (strpos($food, 'STÁLÁ NABÍDKA') > 0) {
                         continue;
                     }
+
+                    if (empty($food)) {
+                        continue;
+                    }
+
                     $price = intval(preg_replace("/.*?(\d+)(,-|\s*Kč).*/ui", '\1', $food));
                     $food = preg_replace("/(\d+)(,-|\s*Kč).*/ui", '', $food);
                     $food = preg_replace('/\((\d+\s*,)*(\s*\d+\s*)*\)\s*$/', '', $food);

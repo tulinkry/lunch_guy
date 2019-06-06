@@ -25,27 +25,41 @@ parameters:
                 parser: nola
                 web: 'http://www.nola.cz/'
                 address: null
-            Enterprise:
-                uri: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
-                parser: praguecatering
-                web: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
+            'CityTower Sodexo':
+                uri: 'http://citytower.portal.sodexo.cz/cs/iframe/jidelni-listek'
+                parser: sodexo
+                web: 'http://citytower.portal.sodexo.cz/cs/iframe/jidelni-listek'
+                address: null
+            'Café Empiria':
+                uri: 'https://cafe-empiria.cz/cs/'
+                parser: cafeempiria
+                web: 'https://cafe-empiria.cz/cs/'
                 address: null
             'Pankrácký rynek':
                 uri: 'http://www.pankrackyrynek.cz/tydenni-menu-rynek'
                 parser: pankrackyrynek
                 web: 'http://www.pankrackyrynek.cz/tydenni-menu-rynek'
                 address: null
+            Enterprise:
+                uri: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
+                parser: praguecatering
+                web: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
+                address: null
             'Potrefená husa':
                 uri: 'https://www.menicka.cz/3815-potrefena-husa-na-pankraci.html'
                 parser: menicka
                 web: 'http://www.potrefene-husy.cz/cz/pankrac-poledni-menu'
                 address: null
-            Colreone:
+            Corleone:
                 uri: 'https://www.menicka.cz/2222-pizzeria-arkady-pankrac.html'
                 parser: menicka
                 web: 'https://www.corleone.cz/pizzeria-arkady/menu'
                 address: null
-
+            Polífkárna:
+                uri: 'http://www.polifkarna.com/tydenni-nabidka'
+                parser: polifkarna
+                web: 'http://www.polifkarna.com/tydenni-nabidka'
+                address: null
 #            'Restaurace Michelská':
 #                uri: 'http://www.michelska.cz/dnes.htm'
 #                parser: michelska

@@ -144,6 +144,20 @@ services:
     tags:
       - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
 
+  net_tomas_kadlec_lunch_guy_base.service_parser.sodexo:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\Sodexo
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
+
+  net_tomas_kadlec_lunch_guy_base.service_parser.polifkarna:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\Polifkarna
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
+
+  net_tomas_kadlec_lunch_guy_base.service_parser.cafeempiria:
+    class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser\CafeEmpiria
+    tags:
+      - { name: net_tomas_kadlec_lunch_guy_base.service.parser }
 
   net_tomas_kadlec_lunch_guy_base.service.output:
     class: Net\TomasKadlec\LunchGuy\BaseBundle\Service\Output
