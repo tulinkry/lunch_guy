@@ -30,6 +30,11 @@ parameters:
                 parser: praguecatering
                 web: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
                 address: null
+            'Pankrácký rynek':
+                uri: 'http://www.pankrackyrynek.cz/tydenni-menu-rynek'
+                parser: pankrackyrynek
+                web: 'http://www.pankrackyrynek.cz/tydenni-menu-rynek'
+                address: null
             'Potrefená husa':
                 uri: 'https://www.menicka.cz/3815-potrefena-husa-na-pankraci.html'
                 parser: menicka
