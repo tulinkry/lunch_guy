@@ -25,6 +25,11 @@ parameters:
                 parser: nola
                 web: 'http://www.nola.cz/'
                 address: null
+            'Perfect Canteen':
+                uri: 'http://menu.perfectcanteen.cz/pdf/27/cz/price/a3'
+                parser: pf
+                web: 'http://menu.perfectcanteen.cz/pdf/27/cz/price/a3'
+                address: null
             'CityTower Sodexo':
                 uri: 'http://citytower.portal.sodexo.cz/cs/iframe/jidelni-listek'
                 parser: sodexo
