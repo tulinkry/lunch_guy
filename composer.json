@@ -28,7 +28,7 @@
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "guzzlehttp/guzzle": "^6.3.2",
+        "guzzlehttp/guzzle": "^6.1.1",
         "symfony/css-selector": "^3.0",
         "doctrine/cache": "^1.6",
         "knplabs/knp-menu-bundle": "^2.",
@@ -38,7 +38,8 @@
         "tomaskadlec/symfony-test": "@stable",
         "friendsofsymfony/rest-bundle": "2.0.0-BETA2",
         "nelmio/api-doc-bundle": "^2.11",
-        "friendsofsymfony/jsrouting-bundle": "^1.6"
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "ottosmops/pdftotext": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

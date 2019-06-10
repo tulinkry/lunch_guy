@@ -4,8 +4,10 @@ MAINTAINER Kryštof Tulinger <k.tulinger@seznam.cz>
 ENV WWW_DIR /usr/src/app
 
 RUN apt-get -y update && \
-  apt-get -y install git zip && \
+  apt-get -y install git zip poppler-utils && \
   apt-get -y clean
+
+RUN echo "memory_limit = 2G" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 WORKDIR /usr/bin
 
