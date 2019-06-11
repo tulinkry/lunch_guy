@@ -40,6 +40,11 @@ parameters:
                 parser: cafeempiria
                 web: 'https://cafe-empiria.cz/cs/'
                 address: null
+            'Obederia (Main Point)':
+                uri: 'https://www.menicka.cz/5666-obederia.html'
+                parser: menicka
+                web: 'https://www.menicka.cz/5666-obederia.html'
+                address: null
             'Pankrácký rynek':
                 uri: 'http://www.pankrackyrynek.cz/tydenni-menu-rynek'
                 parser: pankrackyrynek
