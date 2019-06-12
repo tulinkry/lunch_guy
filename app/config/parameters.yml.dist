@@ -20,10 +20,10 @@ parameters:
             user: tomaskadlec
             repository: lunch_guy
         restaurants:
-            Nola:
-                uri: 'http://www.nola.cz/'
-                parser: nola
-                web: 'http://www.nola.cz/'
+            Enterprise:
+                uri: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
+                parser: praguecatering
+                web: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
                 address: null
             'Perfect Canteen':
                 uri: 'http://menu.perfectcanteen.cz/pdf/27/cz/price/a3'
@@ -34,6 +34,11 @@ parameters:
                 uri: 'http://citytower.portal.sodexo.cz/cs/iframe/jidelni-listek'
                 parser: sodexo
                 web: 'http://citytower.portal.sodexo.cz/cs/iframe/jidelni-listek'
+                address: null
+            Nola:
+                uri: 'http://www.nola.cz/'
+                parser: nola
+                web: 'http://www.nola.cz/'
                 address: null
             'Café Empiria':
                 uri: 'https://cafe-empiria.cz/cs/'
@@ -59,11 +64,6 @@ parameters:
                 uri: 'https://www.coolna.in/inpage/poledni-nabidky/'
                 parser: coolna
                 web: 'https://www.coolna.in/inpage/poledni-nabidky/'
-                address: null
-            Enterprise:
-                uri: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
-                parser: praguecatering
-                web: 'https://www.prague-catering.cz/provozovny/Enterprise-kantyna/Denni-menu-Enterprise/'
                 address: null
             'Potrefená husa':
                 uri: 'https://www.menicka.cz/3815-potrefena-husa-na-pankraci.html'
