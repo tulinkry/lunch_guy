@@ -30,7 +30,7 @@ parameters:
                 parser: pf
                 web: 'http://menu.perfectcanteen.cz/pdf/27/cz/price/a3'
                 address: null
-            'CityTower Sodexo':
+            'CityTower Sodexo (Raiffeisenbank)':
                 uri: 'http://citytower.portal.sodexo.cz/cs/iframe/jidelni-listek'
                 parser: sodexo
                 web: 'http://citytower.portal.sodexo.cz/cs/iframe/jidelni-listek'
