@@ -65,7 +65,6 @@ class PankrackyRynek extends AbstractParser
             return !preg_match('/^\s*$/ui', $el);
         });
 
-
         $data = array_reduce($data, function($acc, $el) {
             if($acc->processing &&
                 preg_match('/^\w+? (\d+\.\d+\.)/ui', $el) &&
@@ -74,7 +73,7 @@ class PankrackyRynek extends AbstractParser
                 return $acc;
             }
 
-            if(!$acc->processing && preg_replace('/^\w+? (\d+\.\d+)/ui', '\1', $el) === date('j.n.')) {
+            if(!$acc->processing && preg_replace('/^\w+? (\d+\.\d+\.).*/ui', '\1', $el) == date('j.n.')) {
                 $acc->processing = true;
                 return $acc;
             }
@@ -92,6 +91,7 @@ class PankrackyRynek extends AbstractParser
                     $price = intval(preg_replace("/.*?(\d+)(,-|\s*Kč).*/ui", '\1', $food));
                     $food = preg_replace("/(\d+)(,-|\s*Kč).*/ui", '', $food);
                     $food = preg_replace('/\((\d+\s*,)*(\s*\d+\s*)*\)\s*$/', '', $food);
+                    $food = str_replace('• ', '', $food);
                     $acc->menu[preg_match('/polévk/', $food) ? self::KEY_SOUPS : self::KEY_MAIN][] = [$food, $price];
                 }
             }
