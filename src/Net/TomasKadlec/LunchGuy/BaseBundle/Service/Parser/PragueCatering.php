@@ -82,12 +82,12 @@ class PragueCatering extends AbstractParser
 
             if (!preg_match('/^\s*$/ui', $row[1]) && !preg_match('/^\s*$/ui', $row[0])) {
                 $name = trim($row[0]);
-                $price = trim($row[1]);
+                $price = str_replace(' Kč', '', trim($row[1]));
 
                 if ($key !== null) {
                     $result[$key][] = [
                         $name,
-                        intval($price)
+                        $key === 'Těstoviny' ? $price : intval($price)
                     ];
                     $i++;
                     continue;
