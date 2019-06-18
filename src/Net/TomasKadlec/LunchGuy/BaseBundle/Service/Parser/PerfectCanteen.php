@@ -3,7 +3,6 @@
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser;
 
 use Ottosmops\Pdftotext\Extract;
-use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class PerfectCanteen

@@ -1,12 +1,7 @@
 <?php
 namespace Net\TomasKadlec\LunchGuy\UiBundle\Controller;
 
-use GuzzleHttp\Client;
-use Net\TomasKadlec\LunchGuy\BaseBundle\Exception\EnhanceYourCalmException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class DefaultController

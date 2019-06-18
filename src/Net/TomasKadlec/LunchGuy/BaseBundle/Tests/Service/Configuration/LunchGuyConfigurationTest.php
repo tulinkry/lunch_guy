@@ -11,7 +11,6 @@ namespace Net\TomasKadlec\LunchGuy\BaseBundle\Tests\Service\Configuration;
 
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\Configuration\LunchGuyConfiguration;
 use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
 
 class LunchGuyConfigurationTest extends \PHPUnit_Framework_TestCase

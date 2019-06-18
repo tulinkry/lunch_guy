@@ -3,7 +3,6 @@
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser;
 
 use DateTime;
-use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**

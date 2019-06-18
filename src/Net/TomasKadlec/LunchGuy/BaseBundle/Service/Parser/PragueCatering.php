@@ -2,8 +2,6 @@
 
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Service\Parser;
 
-use Symfony\Component\DomCrawler\Crawler;
-
 /**
  * Class PragueCatering
  *

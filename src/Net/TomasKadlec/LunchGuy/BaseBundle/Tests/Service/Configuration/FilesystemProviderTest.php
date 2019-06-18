@@ -1,7 +1,6 @@
 <?php
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Tests\Service\Configuration;
 
-use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\Configuration\FilesystemProvider;
 use Net\TomasKadlec\Test\TestCase\ApplicationTestCase;

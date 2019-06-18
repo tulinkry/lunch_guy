@@ -1,15 +1,12 @@
 <?php
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Command;
 
-use GuzzleHttp\Client;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ApplicationInterface;
-use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ParserInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class RunCommand

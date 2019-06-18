@@ -2,8 +2,8 @@
 namespace Net\TomasKadlec\LunchGuy\BaseBundle\Tests\Service;
 
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\Configuration;
-use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ConfigurationInterface;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Service\Configuration\FilesystemProvider;
+use Net\TomasKadlec\LunchGuy\BaseBundle\Service\ConfigurationInterface;
 use Net\TomasKadlec\LunchGuy\BaseBundle\Tests\Service\Configuration\FilesystemProviderTest;
 use Net\TomasKadlec\Test\TestCase\ApplicationTestCase;
 

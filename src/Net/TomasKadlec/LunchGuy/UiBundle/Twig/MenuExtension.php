@@ -2,8 +2,8 @@
 namespace Net\TomasKadlec\LunchGuy\UiBundle\Twig;
 
 use Knp\Menu\ItemInterface;
-use Knp\Menu\Twig\Helper;
 use Knp\Menu\Matcher\MatcherInterface;
+use Knp\Menu\Twig\Helper;
 
 /**
  * Class MenuExtension
